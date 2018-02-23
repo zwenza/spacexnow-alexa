@@ -26,9 +26,11 @@ alexaApp.dictionary = {
 */
 
 alexaApp.intent('LaunchIntent', null, function(request, response) {
+  console.log('got request! query data');
   fetch('https://api.spacexdata.com/v2/launches/upcoming')
     .then(res => res.json())
     .then(json => {
+      console.log('Response: ' + json[0].rocket.rocket_name);
       response.say(json[0].rocket.rocket_name);
     });
 });
