@@ -1,0 +1,11 @@
+{
+  "name": "spacex_info_alexa",
+  "version": "1.0.0",
+  "description": "A spacex alexa skill",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Jöch (david.joech@gmail.com)",
+  "license": "ISC"
+}
