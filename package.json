@@ -10,7 +10,7 @@
   "author": "David Jöch (david.joech@gmail.com)",
   "license": "ISC",
   "dependencies": {
-    "alexa-sdk": "^1.0.25",
+    "alexa-app": "^4.2.1",
     "body-parser": "^1.18.2",
     "express": "^4.16.2"
   }

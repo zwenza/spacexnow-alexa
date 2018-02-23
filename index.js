@@ -1,26 +1,42 @@
 var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
-// Initialize the Alexa SDK
-var Alexa = require('alexa-sdk');
-const PORT = process.env.PORT || 5000;
+var alexa = require('alexa-app');
 
-app.use(bodyParser.json());
-app.post('/', function(req, res) {
-  // Build the context manually, because Amazon Lambda is missing
-  var context = {
-    succeed: function(result) {
-      console.log(result);
-      res.json(result);
-    },
-    fail: function(error) {
-      console.log(error);
-    }
-  };
-  // Delegate the request to the Alexa SDK and the declared intent-handlers
-  var alexa = Alexa.handler(req.body, context);
-  alexa.registerHandlers(handlers);
-  alexa.execute();
+var PORT = process.env.port || 8080;
+var app = express();
+
+// ALWAYS setup the alexa app and attach it to express before anything else.
+var alexaApp = new alexa.app('test');
+
+alexaApp.express({
+  expressApp: app,
+
+  // verifies requests come from amazon alexa. Must be enabled for production.
+  // You can disable this if you're running a dev environment and want to POST
+  // things to test behavior. enabled by default.
+  checkCert: false,
+
+  // sets up a GET route when set to true. This is handy for testing in
+  // development, but not recommended for production. disabled by default
+  debug: true
 });
 
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+// now POST calls to /test in express will be handled by the app.request() function
+
+// from here on you can setup any other express routes or middlewares as normal
+
+alexaApp.launch(function(request, response) {
+  response.say('You launched the app!');
+});
+
+alexaApp.dictionary = {
+  names: ['matt', 'joe', 'bob', 'bill', 'mary', 'jane', 'dawn']
+};
+
+alexaApp.intent('LaunchIntent', null, function(request, response) {
+  response.say('Success!');
+});
+
+app.listen(PORT);
+console.log(
+  'Listening on port ' + PORT + ', try http://localhost:' + PORT + '/test'
+);
