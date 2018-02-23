@@ -37,7 +37,7 @@ alexaApp.intent('LaunchIntent', null, function(request, response) {
       );
 
       console.log('Response: ' + next);
-      response.say('The next launch will be in' + next);
+      response.say('The next launch will be in ' + next);
       response.send();
     });
 });
