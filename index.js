@@ -32,7 +32,9 @@ alexaApp.intent('LaunchIntent', null, function(request, response) {
     .then(json => {
       console.log('Response: ' + json[0].rocket.rocket_name);
       response.say(json[0].rocket.rocket_name);
+      response.send();
     });
+  return false;
 });
 
 app.listen(PORT, () =>
