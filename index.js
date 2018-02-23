@@ -1,7 +1,7 @@
 var express = require('express');
 var alexa = require('alexa-app');
 
-var PORT = process.env.port || 8080;
+var PORT = process.env.port;
 var app = express();
 
 // ALWAYS setup the alexa app and attach it to express before anything else.
@@ -36,7 +36,8 @@ alexaApp.intent('LaunchIntent', null, function(request, response) {
   response.say('Success!');
 });
 
-app.listen(PORT);
-console.log(
-  'Listening on port ' + PORT + ', try http://localhost:' + PORT + '/test'
+app.listen(PORT, () =>
+  console.log(
+    'Listening on port ' + PORT + ', try http://localhost:' + PORT + '/test'
+  )
 );
