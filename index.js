@@ -30,7 +30,7 @@ alexaApp.intent('LaunchIntent', null, function(request, response) {
   fetch('https://api.spacexdata.com/v2/launches/upcoming')
     .then(res => res.json())
     .then(json => {
-      console.log('Response: ' + json[0].rocket.rocket_name);
+      console.log('Response: ' + json[0].rocket.rocket_name + ' a' + response);
       response.say(json[0].rocket.rocket_name);
       response.send();
     });
