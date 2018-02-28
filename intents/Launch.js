@@ -1,4 +1,5 @@
 module.exports = function(request, response) {
+  console.log('Got LaunchIntent');
   return fetch('https://api.spacexdata.com/v2/launches/upcoming')
     .then(res => res.json())
     .then(json => {
